@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ШильдПанель – вариант 2 «Чертёж КТБ»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f1f2ee; --paper2:#e8eae4; --ink:#12203f; --ink2:#3e4a66; --mute:#6f7890;
+  --bl:#2d5bd1; --grid:rgba(45,91,209,.08); --grid2:rgba(45,91,209,.16);
+  --y:#f5c400; --wrap:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:400 17px/1.55 "IBM Plex Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper);
+  background-image:linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;gap:12px;padding:15px 24px;font-weight:600;font-size:15px;border:1.5px solid var(--ink);transition:.2s;background:var(--paper)}
+.btn:hover{background:var(--ink);color:#fff}
+.btn-y{background:var(--y);border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.btn-y:hover{background:var(--y);color:var(--ink);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.frame{border:1.5px solid var(--ink);background:var(--paper);position:relative}
+.zone{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;color:var(--bl);text-transform:uppercase;display:flex;gap:12px;align-items:center}
+.zone::after{content:"";flex:1;height:1px;background:var(--grid2);min-width:40px}
+h2{font-size:clamp(30px,3.8vw,46px);line-height:1.1;font-weight:700;letter-spacing:-.015em;margin-top:14px}
+section{padding:88px 0}
+.shead{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:40px}
+.shead p{color:var(--ink2)}
+
+/* шапка */
+header{position:sticky;top:0;z-index:50;background:rgba(241,242,238,.94);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--ink)}
+.hrow{display:flex;align-items:stretch;height:74px}
+.hrow>*{display:flex;align-items:center;padding:0 16px;border-right:1px solid var(--grid2)}
+.hrow>*:last-child{border-right:0}
+.logo{padding-left:0!important}
+.logo{flex:none}
+.logo img{height:44px}
+nav.menu{flex:1;gap:2px;justify-content:center}
+nav.menu>div{position:relative;height:100%;display:flex;align-items:center}
+nav.menu>div>a{white-space:nowrap;padding:8px 9px;font-size:14.5px;font-weight:500}
+nav.menu>div>a:hover{background:var(--ink);color:#fff}
+nav.menu .sub{position:absolute;top:100%;left:0;min-width:320px;background:var(--paper);border:1.5px solid var(--ink);opacity:0;visibility:hidden;transition:.15s}
+nav.menu>div:hover .sub{opacity:1;visibility:visible}
+nav.menu .sub a{display:flex;gap:14px;padding:11px 16px;border-bottom:1px solid var(--grid2);font-size:15px}
+nav.menu .sub a span{font-family:"IBM Plex Mono";color:var(--mute);font-size:12px;padding-top:2px}
+nav.menu .sub a:hover{background:var(--y)}
+.hph{white-space:nowrap;flex-direction:column;align-items:flex-start!important;justify-content:center;line-height:1.25}
+.hph a{font-weight:700;font-size:18px}
+.hph small{font-family:"IBM Plex Mono";font-size:11px;color:var(--mute)}
+.burger{display:none!important}
+
+/* первый экран */
+.hero{padding:40px 0 64px}
+.sheet{display:grid;grid-template-columns:1fr 1.35fr;border:1.5px solid var(--ink);background:rgba(241,242,238,.7)}
+.sheet .l{padding:44px 40px;border-right:1.5px solid var(--ink);display:flex;flex-direction:column}
+.sheet h1{font-size:clamp(34px,4.3vw,60px);line-height:1.02;font-weight:700;letter-spacing:-.025em;margin:20px 0 22px}
+.sheet h1 mark{background:linear-gradient(transparent 58%,var(--y) 58%);color:inherit}
+.sheet .lead{color:var(--ink2);font-size:18px;max-width:440px}
+.spec{margin-top:auto;padding-top:36px}
+.spec table{width:100%;border-collapse:collapse;font-size:14px}
+.spec th{font:500 11px "IBM Plex Mono";color:var(--mute);text-align:left;padding:6px 8px;border-bottom:1.5px solid var(--ink);letter-spacing:.06em}
+.spec td{padding:10px 8px;border-bottom:1px solid var(--grid2);vertical-align:top}
+.spec td:first-child{font-family:"IBM Plex Mono";color:var(--bl);width:48px}
+.spec td b{font-weight:600}
+.spec tr{cursor:pointer;transition:background .2s}
+.spec tr.on td{background:rgba(245,196,0,.35)}
+.spec td small{display:block;color:var(--mute);font-size:13px;margin-top:2px}
+.sheet .r{position:relative;min-height:560px;overflow:hidden;cursor:crosshair}
+#drw{position:absolute;inset:0;width:100%;height:100%}
+.ln{fill:none;stroke:var(--ink);stroke-width:1.6}
+.dim{fill:none;stroke:var(--bl);stroke-width:1}
+.dimt{font:500 13px "IBM Plex Mono";fill:var(--bl)}
+.eng{font-family:"IBM Plex Sans";fill:var(--ink)}
+.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.6s cubic-bezier(.6,.1,.3,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.fade{opacity:0;animation:fd .8s forwards}
+@keyframes fd{to{opacity:1}}
+.cross{position:absolute;pointer-events:none;inset:0;opacity:0;transition:opacity .2s}
+.r:hover .cross{opacity:1}
+.cross .h,.cross .v{position:absolute;background:var(--bl);opacity:.45}
+.cross .h{left:0;right:0;height:1px}
+.cross .v{top:0;bottom:0;width:1px}
+.cross .c{position:absolute;font:500 11px "IBM Plex Mono";color:#fff;background:var(--bl);padding:3px 6px;transform:translate(10px,10px);white-space:nowrap}
+.stamp{position:absolute;right:0;bottom:0;border-top:1.5px solid var(--ink);border-left:1.5px solid var(--ink);background:var(--paper);display:grid;grid-template-columns:auto auto auto;font-size:12px}
+.stamp div{padding:7px 12px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.stamp div:nth-child(3n){border-right:0}
+.stamp div:nth-last-child(-n+3){border-bottom:0}
+.stamp .k{font-family:"IBM Plex Mono";color:var(--mute);font-size:10px;display:block}
+.acts{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+
+/* преимущества */
+.adv{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);border-left:1.5px solid var(--ink)}
+.adv article{border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);background:var(--paper);display:grid;grid-template-rows:auto 1fr}
+.adv .ph{position:relative;overflow:hidden;border-bottom:1px solid var(--ink)}
+.adv img{aspect-ratio:2/1;object-fit:cover;width:100%;filter:grayscale(1) contrast(1.05);transition:filter .5s}
+.adv article:hover img{filter:none}
+.adv .ph span{position:absolute;left:0;top:0;background:var(--ink);color:#fff;font:500 12px "IBM Plex Mono";padding:6px 10px}
+.adv .b{padding:22px 24px 26px}
+.adv h3{font-size:20px;margin-bottom:10px}
+.adv p{color:var(--ink2);font-size:15.5px}
+
+.nums{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border:1.5px solid var(--ink);background:var(--ink);gap:1.5px}
+.nums div{background:var(--paper);padding:30px 26px}
+.nums b{display:block;font:600 clamp(40px,4.4vw,60px)/1 "IBM Plex Mono";letter-spacing:-.04em;margin-bottom:14px}
+.nums b u{text-decoration:none;background:linear-gradient(transparent 62%,var(--y) 62%)}
+.nums span{font-size:15px;color:var(--ink2)}
+
+/* продукция */
+.prod{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.prod a{display:block}
+.prod .pic{border:1.5px solid var(--ink);position:relative;overflow:hidden;aspect-ratio:5/6;background:#fff}
+.prod img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.prod a:hover img{transform:scale(1.06)}
+.prod .pos{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-items:center;font:600 13px "IBM Plex Mono";transition:.25s}
+.prod a:hover .pos{background:var(--y)}
+.prod .pos::before{content:"";position:absolute;right:100%;top:50%;width:0;height:1.5px;background:var(--ink);transition:width .35s}
+.prod a:hover .pos::before{width:40px}
+.prod .cap{display:flex;justify-content:space-between;gap:10px;padding:12px 2px 0;border-bottom:1px solid var(--grid2)}
+.prod .cap b{font-weight:600}
+.prod .cap span{font:500 12px "IBM Plex Mono";color:var(--mute);padding-top:4px}
+
+/* клиенты */
+.clients{display:grid;grid-template-columns:repeat(7,1fr);border-top:1.5px solid var(--ink);border-left:1.5px solid var(--ink)}
+.clients div{border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);background:#fff;padding:10px;display:grid;place-items:center}
+.clients img{mix-blend-mode:multiply;filter:grayscale(1);opacity:.8;transition:.3s}
+.clients div:hover img{filter:none;opacity:1}
+
+/* выставки */
+.expo{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.expo .pic{border:1.5px solid var(--ink);background:#fff;padding:14px}
+.expo img{aspect-ratio:3/2;object-fit:contain;width:100%}
+.expo p{font-size:15px;color:var(--ink2);margin-top:12px}
+
+/* схема */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.flow::before{content:"";position:absolute;left:0;right:0;top:27px;border-top:1.5px dashed var(--ink)}
+.flow article{padding-right:28px;position:relative}
+.flow .node{width:56px;height:56px;border:1.5px solid var(--ink);background:var(--y);display:grid;place-items:center;font:600 20px "IBM Plex Mono";position:relative;margin-bottom:26px;transform:rotate(45deg)}
+.flow .node span{transform:rotate(-45deg)}
+.flow h3{font-size:20px;margin-bottom:10px}
+.flow p{color:var(--ink2);font-size:15.5px}
+.flow small{display:block;font:500 12px "IBM Plex Mono";color:var(--bl);margin-bottom:6px}
+
+/* география */
+.geo{display:grid;grid-template-columns:1.35fr 1fr;border:1.5px solid var(--ink)}
+.geo .map{border-right:1.5px solid var(--ink);background:#fff;padding:24px;position:relative}
+.geo .map img{filter:grayscale(1) contrast(1.1);mix-blend-mode:multiply}
+.geo .map::after{content:"";position:absolute;inset:0;background:var(--bl);mix-blend-mode:screen;opacity:.18;pointer-events:none}
+.geo .txt{padding:36px}
+.cities{columns:2;margin-top:24px;font-size:15px}
+.cities a{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--grid2);break-inside:avoid}
+.cities a span{font:500 12px "IBM Plex Mono";color:var(--mute);padding-top:3px;width:22px}
+.cities a:hover{color:var(--bl)}
+
+/* форма */
+.cta{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--ink);background:var(--paper)}
+.cta .l{padding:48px;border-right:1.5px solid var(--ink);background:var(--y)}
+.cta .l p{font-size:19px;margin-top:16px}
+.cta form{padding:40px 48px;display:grid;gap:16px}
+.cta label{font:500 11px "IBM Plex Mono";color:var(--mute);letter-spacing:.06em;text-transform:uppercase;display:grid;gap:6px}
+.cta input,.cta textarea{border:0;border-bottom:1.5px solid var(--ink);background:transparent;padding:10px 0;font:400 17px "IBM Plex Sans";color:var(--ink);outline:0}
+.cta input:focus,.cta textarea:focus{border-color:var(--bl)}
+.cta textarea{min-height:80px;resize:vertical}
+.cta .btn{justify-content:center;margin-top:8px}
+
+footer{margin-top:88px;border-top:1.5px solid var(--ink);background:var(--ink);color:#c5cbe0;font-size:15px}
+.fg{display:grid;grid-template-columns:repeat(3,1fr)}
+.fg>div{padding:44px 28px 44px 0}
+footer b{color:#fff;display:block;margin-bottom:8px}
+footer .phn{font:600 26px "IBM Plex Mono";color:#fff}
+footer a:hover{color:var(--y)}
+footer .note{margin-top:14px;border:1px dashed #56617f;padding:12px}
+footer .bot{border-top:1px solid #2c3a5c;padding:22px 0 36px;font-size:14px}
+footer .bot a{text-decoration:underline;text-decoration-color:#4a5677}
+footer .legal{display:flex;gap:24px;margin-top:14px;flex-wrap:wrap}
+
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:1360px){.hrow .btn{padding:12px 16px;font-size:14px}}
+@media (max-width:1400px){.hrow .btn{display:none}}
+@media (max-width:1100px){
+  nav.menu,.hph small{display:none!important}
+  .burger{display:flex!important}
+  .sheet,.geo,.cta,.shead{grid-template-columns:1fr}
+  .sheet .l{border-right:0;border-bottom:1.5px solid var(--ink)}
+  .geo .map,.cta .l{border-right:0;border-bottom:1.5px solid var(--ink)}
+  .adv,.expo,.prod,.flow{grid-template-columns:repeat(2,1fr)}
+  .flow{row-gap:40px}.flow::before{display:none}
+  .clients{grid-template-columns:repeat(4,1fr)}
+  .nums{grid-template-columns:repeat(2,1fr)}
+  .fg{grid-template-columns:1fr}.fg>div{padding:24px 0}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  section{padding:60px 0}
+  .hrow .btn,.hph{display:none!important}
+  .hrow{justify-content:space-between}
+  .sheet .l,.cta .l,.cta form,.geo .txt{padding:26px 20px}
+  .sheet .r{min-height:360px}
+  .adv,.expo,.flow,.nums{grid-template-columns:1fr}
+  .prod{grid-template-columns:repeat(2,1fr);gap:16px}
+  .clients{grid-template-columns:repeat(2,1fr)}
+  .cities{columns:1}
+  .stamp{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.draw{stroke-dashoffset:0}.fade{opacity:1}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap hrow">
+  <a class="logo" href="#"><img src="../assets/img/logo.svg" alt="ШильдПанель"></a>
+  <nav class="menu">
+    <div><a href="#products">Продукция ▾</a>
+      <div class="sub"><a href="#"><span>01</span>Корпуса</a><a href="#"><span>02</span>Панели приборов</a><a href="#"><span>03</span>Таблички</a><a href="#"><span>04</span>Клавиатуры</a><a href="#"><span>05</span>Шильды</a><a href="#"><span>06</span>Маркировочные бирки</a><a href="#"><span>07</span>Пульты управления и промышленные клавиатуры</a></div></div>
+    <div><a href="#">Технологии</a></div>
+    <div><a href="#">Разработка (КТБ)</a></div>
+    <div><a href="#">Материалы ▾</a>
+      <div class="sub"><a href="#"><span>01</span>Анодированный алюминий</a><a href="#"><span>02</span>Сублимационный алюминий</a></div></div>
+    <div><a href="#">Портфолио</a></div>
+    <div><a href="#">Кейсы</a></div>
+    <div><a href="#">О компании</a></div>
+  </nav>
+  <div class="hph"><a href="tel:78007775102">8 (800) 777-51-02</a><small>БЕСПЛАТНО ПО РФ</small></div>
+  <div style="padding-right:0"><a class="btn btn-y" href="#form">Отправить заявку</a></div>
+  <button class="burger" aria-label="Меню">☰</button>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="sheet">
+    <div class="l">
+      <div class="zone">Лист 01 · Производственная компания</div>
+      <h1>Шильды, панели и&nbsp;клавиатуры <mark>от чертежа</mark> до&nbsp;отгрузки</h1>
+      <p class="lead">Отправьте макеты или техническое задание. Поможем подобрать технологии и материалы.</p>
+      <div class="acts"><a class="btn btn-y" href="#form">Описать задачу →</a><a class="btn" href="#products">Смотреть продукцию</a></div>
+      <div class="spec">
+        <table>
+          <thead><tr><th>ПОЗ.</th><th>НАИМЕНОВАНИЕ</th></tr></thead>
+          <tbody id="spec"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="r" id="board">
+      <svg id="drw" viewBox="95 75 680 470" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="cross"><i class="h"></i><i class="v"></i><span class="c"></span></div>
+      <div class="stamp">
+        <div><span class="k">НАИМЕНОВАНИЕ</span><b id="stN">Шильд</b></div><div><span class="k">МАТЕРИАЛ</span><span id="stM">Алюминий</span></div><div><span class="k">МАСШТАБ</span>1:1</div>
+        <div><span class="k">СРОК</span>~7 раб. дней</div><div><span class="k">ОТК</span>100%</div><div><span class="k">ЛИСТ</span>1 / 1</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top:24px"><div class="wrap">
+  <div class="shead"><div><div class="zone">А · Почему мы</div><h2>Наши преимущества</h2></div></div>
+  <div class="adv">
+    <article class="rv"><div class="ph"><img src="../assets/img/utp/utp-1.jpg" alt=""><span>А.1</span></div><div class="b"><h3>Собственное производство</h3><p>15 лет разрабатываем и изготавливаем для России и мира. В 2020 году команда выросла до 90 специалистов, а площадь компании до 2000 м². Постоянно совершенствуем процессы и расширяемся.</p></div></article>
+    <article class="rv"><div class="ph"><img src="../assets/img/utp/utp-2.jpg" alt=""><span>А.2</span></div><div class="b"><h3>Три гарантии качества</h3><p>1. Система менеджмента качества ГОСТ Р ИСО 9001-2015.<br>2. Проверка ОТК каждого выпускаемого изделия.<br>3. Замена брака без вопросов и с доставкой за наш счёт.</p></div></article>
+    <article class="rv"><div class="ph"><img src="../assets/img/utp/utp-3.jpg" alt=""><span>А.3</span></div><div class="b"><h3>Оптимальные цены</h3><p>Всегда ищем способы снизить стоимость для вас как через технологии, так и через материалы. 5 лет держим цены на неизменном уровне благодаря растущим объёмам производства.</p></div></article>
+    <article class="rv"><div class="ph"><img src="../assets/img/utp/utp-4.jpg" alt=""><span>А.4</span></div><div class="b"><h3>Арсенал технологий</h3><p>Всё в одной компании: печать и нанесение покрытий, механическая и лазерная обработка, электроника. Как эксперты в производстве, поможем сделать правильный выбор для решения ваших задач.</p></div></article>
+    <article class="rv"><div class="ph"><img src="../assets/img/utp/utp-5.jpg" alt=""><span>А.5</span></div><div class="b"><h3>Сроки без срывов</h3><p>Средний срок изготовления за 2020 год – 7 дней. Отгрузим часть партии заранее. Не прячем голову в песок при форс-мажорах и готовы сжимать сроки. Склад сотни видов сырья весом более 10 тонн.</p></div></article>
+    <article class="rv"><div class="ph"><img src="../assets/img/utp/utp-6.jpg" alt=""><span>А.6</span></div><div class="b"><h3>Разработка под вас</h3><p>Разрабатываем конструкции, электронику, 3D-модели. Подготавливаем опытные образцы, тестируем, совершенствуем готовые изделия. Умеем решать нестандартные задачи.</p></div></article>
+  </div>
+  <div class="nums rv">
+    <div><b><u data-n="5000">5000</u></b><span>компаний доверили нам изготовление своей продукции</span></div>
+    <div><b><u data-n="7">7</u></b><span>рабочих дней – средний срок выполнения заказа в 2020 году</span></div>
+    <div><b><u data-n="96" data-s="%">96%</u></b><span>заказчиков довольны качеством продукции согласно опросам</span></div>
+    <div><b><u>&lt;1%</u></b><span>рекламаций – показатель качества нашей работы</span></div>
+  </div>
+</div></section>
+
+<section id="products" style="padding-top:0"><div class="wrap">
+  <div class="shead"><div><div class="zone">Б · Каталог</div><h2>Виды продукции</h2></div><div style="text-align:right"><a class="btn" href="#">Вся продукция →</a></div></div>
+  <div class="prod" id="prod"></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="shead"><div><div class="zone">В · Доверие</div><h2>Наши клиенты</h2></div><p>За 14 лет мы решили задачи тысяч компаний. От таблички на двери в соседнем офисе до панели управления на атомной станции.</p></div>
+  <div class="clients rv" id="clients"></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="shead"><div><div class="zone">Г · События</div><h2>Выставки</h2></div><p>Являемся постоянными экспонентами ведущих профессиональных выставок.</p></div>
+  <div class="expo">
+    <article class="rv"><div class="pic"><img src="../assets/img/expo/rek.jpg" alt=""></div><p>Международная специализированная выставка</p></article>
+    <article class="rv"><div class="pic"><img src="../assets/img/expo/radel.jpg" alt=""></div><p>Международная выставка «Радиоэлектроника &amp; Приборостроение»</p></article>
+    <article class="rv"><div class="pic"><img src="../assets/img/expo/chipexpo.jpg" alt=""></div><p>Электроника, компоненты, оборудование, технологии</p></article>
+    <article class="rv"><div class="pic"><img src="../assets/img/expo/expo-electronika.jpg" alt=""></div><p>Международная выставка электронных компонентов, модулей и комплектующих</p></article>
+  </div>
+  <div style="margin-top:32px"><a class="btn" href="#">Смотреть дипломы об участии</a></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="shead"><div><div class="zone">Д · Как работаем</div><h2>Схема работы</h2></div></div>
+  <div class="flow">
+    <article class="rv"><div class="node"><span>1</span></div><small>ШАГ 01</small><h3>Оформление заказа</h3><p>Отправьте макеты или техническое задание. Поможем подобрать технологии и материалы.</p></article>
+    <article class="rv"><div class="node"><span>2</span></div><small>ШАГ 02 · 1–3 ДНЯ</small><h3>Оплата и макеты</h3><p>Пришлите реквизиты и оплатите счёт. Разработаем макет за 1-3 рабочих дня. Утвердите макеты.</p></article>
+    <article class="rv"><div class="node"><span>3</span></div><small>ШАГ 03 · ~5 ДНЕЙ</small><h3>Производство</h3><p>Начинаем изготовление после оплаты и утверждения макетов. Средний срок 5 рабочих дней.</p></article>
+    <article class="rv"><div class="node"><span>4</span></div><small>ШАГ 04</small><h3>Отгрузка</h3><p>Проводим проверку в ОТК. Доставим любой удобной транспортной компанией до вас или пункта выдачи.</p></article>
+  </div>
+</div></section>
+
+<section id="geo" style="padding-top:0"><div class="wrap">
+  <div class="geo rv">
+    <div class="map"><img src="../assets/img/map.jpg" alt="Карта доставки"></div>
+    <div class="txt"><div class="zone">Е · Доставка</div><h2>География работы – вся Россия</h2><div class="cities" id="cities"></div></div>
+  </div>
+</div></section>
+
+<section id="form" style="padding:0"><div class="wrap">
+  <div class="cta rv">
+    <div class="l"><div class="zone" style="color:var(--ink)">Производственная компания «ШильдПанель»</div><h2>Не нашли нужный продукт?</h2><p>Напишите нам, мы готовы решить нестандартные задачи.</p></div>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Спасибо! Это прототип'">
+      <label>Имя<input></label>
+      <label>Телефон или e-mail<input></label>
+      <label>Задача<textarea placeholder="Изделие, материал, тираж, размеры"></textarea></label>
+      <button class="btn btn-y">Описать задачу →</button>
+    </form>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fg">
+    <div><b>ООО «ШильдПанель»</b><div class="mono" style="font-size:13px">ИНН 3329035362, ОГРН 1053303634075</div><div>Время работы: пн. – пт. 9:00 – 17:30</div><div class="note">Убедительная просьба – перед приездом обязательно отзвонитесь, в здании пропускная система!</div></div>
+    <div><a class="phn" href="tel:78007775102">8 (800) 777-51-02</a><div>Бесплатный звонок по РФ</div></div>
+    <div><b>Электронная почта</b><div><a href="mailto:info@shildpanel.ru">info@shildpanel.ru</a> – отдел продаж</div><div><a href="mailto:snab@shildpanel.ru">snab@shildpanel.ru</a> – отдел закупок</div><div><a href="mailto:hr@shildpanel.ru">hr@shildpanel.ru</a> – менеджер по персоналу</div></div>
+  </div>
+  <div class="bot">Мы доставляем в регионы: <span id="fcities"></span>
+    <div class="legal"><a href="#">Карта сайта</a><a href="#">Политика конфиденциальности</a><a href="#">Публичная оферта</a></div></div>
+</div></footer>
+
+<script>
+var SLIDES=[
+ ['Лицевые панели','Панели приборов из алюминия, пластика, пленки и стали.','Панель приборов','Алюминий'],
+ ['Клавиатуры','Гибкие пленочные. Антистатические. Взрывозащищенные. Силиконовые. Металлические. Сенсорные.','Клавиатура','Плёнка'],
+ ['Корпуса и доработка корпусов','Механическая доработка. Нанесение устойчивого изображения. Комплектация крепежом.','Корпус','Алюминий'],
+ ['Шильды','Алюминий. Латунь. Нержавеющая сталь. Пластик и смола.','Шильд','Алюминий']
+];
+var PROD=[['panel','Панели приборов'],['korpus','Корпуса'],['key','Клавиатуры'],['shild','Шильды'],['tab','Таблички'],['bei','Бейджи'],['birka','Маркировочные бирки'],['diplom','Дипломы и плакетки']];
+var CLIENTS=['uaz','mts','gum','transneft','universal','rosatom','otis','avtomatika','mail','rzd','teplokom','ckba','elteza','transmash'];
+var CITIES=['Москва','Санкт-Петербург','Воронеж','Екатеринбург','Ижевск','Казань','Красноярск','Нижний Новгород','Новосибирск','Омск','Пермь','Ростов-на-Дону','Самара','Саратов','Уфа','Челябинск'];
+function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e}
+
+/* чертёж шильда */
+var NS='http://www.w3.org/2000/svg',svg=document.getElementById('drw');
+function s(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e}
+var X=150,Y=150,W=500,H=280,R=18;
+function drawShild(i){
+  svg.replaceChildren();
+  var defs=s('defs',{});var cp=s('clipPath',{id:'pc'},defs);s('rect',{x:X,y:Y,width:W,height:H,rx:R},cp);
+  var ph=s('image',{href:'../assets/img/hero/slider-'+(i+1)+'.jpg',x:X-60,y:Y-20,width:W+120,height:H+50,preserveAspectRatio:'xMidYMid slice','clip-path':'url(#pc)',class:'fade',style:'animation-delay:1.9s'});
+  var paths=[];
+  paths.push(s('rect',{x:X,y:Y,width:W,height:H,rx:R,class:'ln draw'}));
+  paths.push(s('rect',{x:X+14,y:Y+14,width:W-28,height:H-28,rx:R-8,class:'dim draw','stroke-dasharray':'6 4'}));
+  [[X+30,Y+30],[X+W-30,Y+30],[X+30,Y+H-30],[X+W-30,Y+H-30]].forEach(function(p){paths.push(s('circle',{cx:p[0],cy:p[1],r:9,class:'ln draw'}));
+    s('line',{x1:p[0]-16,y1:p[1],x2:p[0]+16,y2:p[1],class:'dim fade',style:'animation-delay:1s'});s('line',{x1:p[0],y1:p[1]-16,x2:p[0],y2:p[1]+16,class:'dim fade',style:'animation-delay:1s'})});
+  // размерные линии
+  var g=s('g',{class:'fade',style:'animation-delay:1.2s'});
+  s('line',{x1:X,y1:Y-50,x2:X+W,y2:Y-50,class:'dim','marker-start':'url(#a)','marker-end':'url(#a)'},g);
+  s('line',{x1:X,y1:Y-60,x2:X,y2:Y-8,class:'dim'},g);s('line',{x1:X+W,y1:Y-60,x2:X+W,y2:Y-8,class:'dim'},g);
+  s('text',{x:X+W/2,y:Y-58,'text-anchor':'middle',class:'dimt'},g).textContent='120';
+  s('line',{x1:X+W+50,y1:Y,x2:X+W+50,y2:Y+H,class:'dim'},g);
+  s('line',{x1:X+W+8,y1:Y,x2:X+W+60,y2:Y,class:'dim'},g);s('line',{x1:X+W+8,y1:Y+H,x2:X+W+60,y2:Y+H,class:'dim'},g);
+  var t=s('text',{x:X+W+64,y:Y+H/2,class:'dimt',transform:'rotate(90 '+(X+W+64)+' '+(Y+H/2)+')','text-anchor':'middle'},g);t.textContent='68';
+  s('text',{x:X+36,y:Y+H+40,class:'dimt'},g).textContent='4 отв. Ø4 · R4';
+  var m=s('marker',{id:'a',viewBox:'0 0 10 10',refX:5,refY:5,markerWidth:8,markerHeight:8,orient:'auto-start-reverse'},defs);s('path',{d:'M0 2 L10 5 L0 8 z',fill:'#2d5bd1'},m);
+  // выноска
+  var cl=s('g',{class:'fade',style:'animation-delay:2.4s'});
+  s('path',{d:'M'+(X+W-90)+' '+(Y+H-60)+' L'+(X+W-20)+' '+(Y+H+60)+' L'+(X+W+80)+' '+(Y+H+60),class:'ln'},cl);
+  s('circle',{cx:X+W-90,cy:Y+H-60,r:4,fill:'#12203f'},cl);
+  s('text',{x:X+W-12,y:Y+H+52,class:'dimt',fill:'#12203f'},cl).textContent=SLIDES[i][2];
+  paths.forEach(function(p,k){var L=p.getTotalLength?p.getTotalLength():1000;p.style.setProperty('--len',L);p.style.animationDelay=(k*.12)+'s'});
+  document.getElementById('stN').textContent=SLIDES[i][2];document.getElementById('stM').textContent=SLIDES[i][3];
+}
+var spec=document.getElementById('spec'),cur=3,timer;
+SLIDES.forEach(function(sl,i){var tr=el('tr');var a=el('td',null,'0'+(i+1));var b=el('td');b.append(el('b',null,sl[0]),el('small',null,sl[1]));tr.append(a,b);tr.onclick=function(){pick(i)};spec.appendChild(tr)});
+function pick(i){cur=i;[].forEach.call(spec.children,function(r,k){r.classList.toggle('on',k===i)});drawShild(i);clearTimeout(timer);timer=setTimeout(function(){pick((cur+1)%4)},7000)}
+pick(3);
+
+/* перекрестие с координатами в мм */
+var board=document.getElementById('board'),cr=board.querySelector('.cross');
+board.addEventListener('mousemove',function(e){var r=board.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  cr.querySelector('.h').style.top=y+'px';cr.querySelector('.v').style.left=x+'px';var c=cr.querySelector('.c');c.style.left=x+'px';c.style.top=y+'px';
+  c.textContent='X '+(x/r.width*160).toFixed(1)+'  Y '+(y/r.height*120).toFixed(1)+' мм'});
+
+var prod=document.getElementById('prod');
+PROD.forEach(function(p,i){var a=el('a','rv');a.href='#';var pic=el('div','pic');var im=el('img');im.src='../assets/img/prod/'+p[0]+'.jpg';im.alt='';pic.append(im,el('span','pos',String(i+1)));
+  var cap=el('div','cap');cap.append(el('b',null,p[1]),el('span',null,'Б.'+(i+1)));a.append(pic,cap);prod.appendChild(a)});
+var cl=document.getElementById('clients');CLIENTS.forEach(function(c){var d=el('div'),im=el('img');im.src='../assets/img/clients/'+c+'.jpg';im.alt='';d.appendChild(im);cl.appendChild(d)});
+var ci=document.getElementById('cities'),fc=document.getElementById('fcities');
+CITIES.forEach(function(c,i){var a=el('a');a.href='#';a.append(el('span',null,String(i+1).padStart(2,'0')),c);ci.appendChild(a);var f=el('a',null,c);f.href='#';fc.append(f,i<CITIES.length-1?', ':'')});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
+  e.target.querySelectorAll('[data-n]').forEach(function(b){var n=+b.dataset.n,sf=b.dataset.s||'',t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/1400);b.textContent=Math.round(n*(1-Math.pow(1-k,3)))+sf;if(k<1)requestAnimationFrame(f)})(t0)})})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(e,i){e.style.transitionDelay=(i%4)*70+'ms';io.observe(e)});
+</script>
+<script src="../assets/switcher.js"></script>
+</body>
+</html>

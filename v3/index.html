@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ru" data-switcher="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ШильдПанель – WOW «Лазер»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0f11;--s1:#18181b;--s2:#222226;--line:rgba(255,255,255,.09);--tx:#ecebe7;--tx2:#a9a8a3;--y:#f5c400;--hot:#ff8a1f;--wrap:1280px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:400 17px/1.6 Manrope,system-ui,sans-serif;color:var(--tx);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+.d{font-family:Unbounded,sans-serif;letter-spacing:-.02em}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-weight:700;font-size:15px;transition:.25s}
+.btn-y{background:var(--y);color:#141414}
+.btn-y:hover{box-shadow:0 0 0 6px rgba(245,196,0,.18),0 12px 40px rgba(245,196,0,.35);transform:translateY(-2px)}
+.btn-g{border:1px solid rgba(255,255,255,.22)}
+.btn-g:hover{border-color:var(--y);color:var(--y)}
+.kicker{font:500 12px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--y);display:inline-flex;gap:10px;align-items:center}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--y);box-shadow:0 0 12px var(--y)}
+h2{font:600 clamp(30px,4vw,54px)/1.05 Unbounded,sans-serif;letter-spacing:-.03em;margin-top:18px}
+section{padding:110px 0;position:relative}
+.shead{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:48px;flex-wrap:wrap}
+.shead p{max-width:440px;color:var(--tx2)}
+
+/* шапка */
+header{position:fixed;inset:0 0 auto;z-index:60;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+header.sc{background:rgba(15,15,17,.82);backdrop-filter:blur(14px);border-color:var(--line)}
+.hrow{display:flex;align-items:center;gap:18px;height:78px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo{flex:none}
+.logo img{height:44px;filter:brightness(0) invert(1)}
+nav.menu{display:flex;gap:2px;flex:1;justify-content:center}
+nav.menu>div{position:relative}
+nav.menu>div>a{display:block;white-space:nowrap;padding:9px 9px;border-radius:999px;font-weight:500;font-size:14.5px;color:#d8d7d2}
+nav.menu>div>a:hover{background:rgba(255,255,255,.07);color:#fff}
+nav.menu .sub{position:absolute;top:calc(100% + 8px);left:0;min-width:320px;background:#1c1c20;border:1px solid var(--line);border-radius:16px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.2s;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+nav.menu>div:hover .sub{opacity:1;visibility:visible;transform:none}
+nav.menu .sub a{display:block;padding:10px 14px;border-radius:10px;font-size:15px;color:#d8d7d2}
+nav.menu .sub a:hover{background:rgba(245,196,0,.12);color:var(--y)}
+.hph{text-align:right;line-height:1.2;white-space:nowrap}
+.hph a{font-weight:700;font-size:17px}
+.hph small{display:block;color:var(--tx2);font-size:12px}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line)}
+
+/* первый экран */
+.hero{min-height:100vh;padding:130px 0 60px;display:flex;align-items:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 72% 45%,rgba(245,196,0,.09),transparent 60%),radial-gradient(700px 500px at 10% 90%,rgba(255,138,31,.06),transparent 60%)}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 60% 50%,#000 20%,transparent 75%);opacity:.5;pointer-events:none}
+.hgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;position:relative;z-index:2;width:100%}
+.hgrid>*{min-width:0}
+.hero h1{font:700 clamp(36px,4.6vw,68px)/1.02 Unbounded,sans-serif;letter-spacing:-.035em;margin:22px 0 22px}
+.hero h1 em{font-style:normal;color:var(--y);text-shadow:0 0 30px rgba(245,196,0,.35)}
+.hero .lead{font-size:19px;color:var(--tx2);max-width:480px}
+.dirs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:36px}
+.dirs a{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);transition:.25s}
+.dirs a b{display:block;font-weight:700;font-size:15px;margin-bottom:2px}
+.dirs a span{font-size:13px;color:var(--tx2);display:block;line-height:1.4}
+.dirs a:hover{border-color:rgba(245,196,0,.5);background:rgba(245,196,0,.05)}
+.acts{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+
+.lab{position:relative}
+.stage{perspective:1500px}
+.tilt{transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1);position:relative}
+#plate{width:100%;aspect-ratio:16/10;display:block;filter:drop-shadow(0 50px 60px rgba(0,0,0,.6))}
+.sheen{position:absolute;inset:0;border-radius:4%;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.16) calc(var(--sx,40%) - 6%),rgba(255,255,255,.02) var(--sx,40%),transparent 60%);mix-blend-mode:screen}
+.ctrl{margin-top:26px;background:rgba(24,24,27,.8);border:1px solid var(--line);border-radius:22px;padding:18px;backdrop-filter:blur(10px)}
+.ctrl .row{display:flex;gap:10px;align-items:center}
+.ctrl label{font:500 11px "JetBrains Mono";color:var(--tx2);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:8px}
+.ctrl input{flex:1;min-width:0;background:#0d0d0f;border:1px solid var(--line);border-radius:12px;padding:13px 15px;outline:0;font-weight:600;font-size:16px}
+.ctrl input:focus{border-color:var(--y)}
+.go{width:48px;height:48px;border-radius:12px;background:var(--y);color:#141414;display:grid;place-items:center;font-weight:800;font-size:18px;flex:none}
+.mats{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mat{display:flex;gap:8px;align-items:center;padding:7px 12px 7px 7px;border-radius:999px;border:1px solid var(--line);font-size:13px;font-weight:600;color:#cfceca;transition:.2s}
+.mat i{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 -2px 4px rgba(0,0,0,.35),inset 0 2px 3px rgba(255,255,255,.4)}
+.mat.on{border-color:var(--y);color:#fff;background:rgba(245,196,0,.08)}
+.ctrl .foot{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.ctrl .foot p{font-size:13px;color:var(--tx2);max-width:300px;line-height:1.45}
+.ctrl .foot p b{color:var(--y);font-weight:600}
+.ctrl .btn{padding:12px 18px;font-size:14px}
+.status{position:absolute;left:16px;top:14px;font:500 11px "JetBrains Mono";color:var(--hot);letter-spacing:.08em;display:flex;gap:8px;align-items:center;z-index:3;opacity:0;transition:opacity .3s}
+.status.on{opacity:1}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--hot);box-shadow:0 0 10px var(--hot);animation:bl .6s infinite alternate}
+@keyframes bl{to{opacity:.2}}
+
+/* преимущества */
+.adv{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.adv article{background:var(--s1);border:1px solid var(--line);border-radius:24px;overflow:hidden;position:relative;transition:border-color .3s,transform .4s}
+.adv article:hover{border-color:rgba(245,196,0,.4);transform:translateY(-4px)}
+.adv .ph{position:relative;overflow:hidden}
+.adv img{aspect-ratio:2/1;object-fit:cover;width:100%;filter:saturate(.7) brightness(.8);transition:filter .5s,transform .8s}
+.adv article:hover img{filter:none;transform:scale(1.05)}
+.adv .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,var(--s1))}
+.adv .n{position:absolute;right:18px;top:14px;z-index:2;font:600 44px/1 Unbounded;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.55)}
+.adv .b{padding:4px 26px 28px;position:relative}
+.adv h3{font:600 19px/1.25 Unbounded;margin-bottom:12px;letter-spacing:-.01em}
+.adv p{color:var(--tx2);font-size:15.5px}
+
+.nums{display:grid;grid-template-columns:repeat(4,1fr);margin-top:70px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.nums div{padding:40px 24px;border-right:1px solid var(--line)}
+.nums div:last-child{border-right:0}
+.nums b{display:block;font:700 clamp(40px,5vw,72px)/1 Unbounded;color:var(--y);letter-spacing:-.04em;margin-bottom:14px}
+.nums span{color:var(--tx2);font-size:15px}
+.nums .beam{position:absolute;top:0;bottom:0;width:2px;background:linear-gradient(transparent,var(--hot),transparent);box-shadow:0 0 18px 4px rgba(255,138,31,.5);left:-10px}
+.nums.in .beam{animation:beam 2.2s cubic-bezier(.6,0,.3,1) forwards}
+@keyframes beam{to{left:calc(100% + 10px)}}
+
+/* продукция – висящие бирки */
+.tags{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 22px}
+.tagc{display:block;position:relative;padding-top:26px}
+.tagc::before{content:"";position:absolute;left:50%;top:0;width:1px;height:30px;background:linear-gradient(#555,#888)}
+.tagc .body{position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(145deg,#2a2a2f,#18181b);border:1px solid rgba(255,255,255,.12);transform-origin:50% -26px;transition:transform .6s cubic-bezier(.3,1.6,.5,1),box-shadow .4s}
+.tagc:hover .body{animation:swing 1.4s ease-out;box-shadow:0 30px 60px -20px rgba(245,196,0,.25)}
+@keyframes swing{0%{transform:rotate(0)}20%{transform:rotate(5deg)}45%{transform:rotate(-3.5deg)}70%{transform:rotate(1.6deg)}100%{transform:rotate(0)}}
+.tagc .hole{position:absolute;left:50%;top:12px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--bg);box-shadow:inset 0 2px 3px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.2);z-index:3}
+.tagc img{width:100%;aspect-ratio:5/5.4;object-fit:cover;filter:brightness(.85)}
+.tagc .cap{padding:16px 18px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tagc .cap b{font:600 15px/1.25 Unbounded}
+.tagc .cap span{font:500 11px "JetBrains Mono";color:var(--tx2)}
+.tagc .gl{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-100%);transition:transform .9s;pointer-events:none;z-index:2}
+.tagc:hover .gl{transform:translateX(100%)}
+
+/* клиенты */
+.marq{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);display:grid;gap:14px}
+.track{display:flex;gap:14px;width:max-content;animation:mq 40s linear infinite}
+.track.rev{animation-direction:reverse}
+.marq:hover .track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.plq{width:210px;height:106px;border-radius:14px;background:linear-gradient(160deg,#f4f4f2,#cfd1d4);display:grid;place-items:center;padding:8px;position:relative;box-shadow:inset 0 1px 0 #fff,0 10px 24px rgba(0,0,0,.4)}
+.plq img{mix-blend-mode:multiply;max-height:88px}
+.plq::before,.plq::after{content:"";position:absolute;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:#8b8e93;box-shadow:inset 0 1px 1px rgba(0,0,0,.5)}
+.plq::before{left:8px}.plq::after{right:8px}
+
+/* выставки */
+.expo{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.expo article{background:var(--s1);border:1px solid var(--line);border-radius:20px;padding:14px;transition:.3s}
+.expo article:hover{border-color:rgba(245,196,0,.4)}
+.expo .pic{background:#fff;border-radius:12px;padding:10px}
+.expo img{aspect-ratio:3/2;object-fit:contain;width:100%}
+.expo p{font-size:14.5px;color:var(--tx2);padding:14px 6px 4px}
+
+/* схема */
+.flow{display:grid;grid-template-columns:260px 1fr;gap:60px}
+.rail{position:relative;padding-left:44px}
+.rail::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.rail .fill{position:absolute;left:11px;top:6px;width:2px;height:var(--p,0%);background:linear-gradient(var(--y),var(--hot));box-shadow:0 0 14px var(--hot)}
+.step{position:relative;padding:0 0 56px}
+.step:last-child{padding-bottom:0}
+.step .dot{position:absolute;left:-44px;top:0;width:24px;height:24px;border-radius:50%;border:2px solid #3a3a3f;background:var(--bg);transition:.4s}
+.step.on .dot{border-color:var(--y);background:var(--y);box-shadow:0 0 18px var(--y)}
+.step small{font:500 12px "JetBrains Mono";color:var(--tx2);letter-spacing:.1em}
+.step h3{font:600 clamp(22px,2.4vw,32px)/1.15 Unbounded;margin:8px 0 10px;color:#77766f;transition:color .4s}
+.step.on h3{color:var(--tx)}
+.step p{color:var(--tx2);max-width:560px}
+
+/* география */
+.geo{display:grid;grid-template-columns:1.3fr 1fr;gap:50px;align-items:center}
+.map{border-radius:26px;overflow:hidden;background:#141416;border:1px solid var(--line);padding:24px}
+.map img{filter:invert(1) hue-rotate(180deg) grayscale(.6) brightness(.85) contrast(1.1);mix-blend-mode:screen}
+.cities{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.cities a{padding:8px 13px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:#d0cfca;transition:.2s}
+.cities a:hover{border-color:var(--y);color:var(--y)}
+
+/* форма */
+.cta{position:relative;border-radius:34px;overflow:hidden;border:1px solid rgba(245,196,0,.3);background:radial-gradient(800px 400px at 0% 0%,rgba(245,196,0,.16),transparent 60%),var(--s1);padding:64px;display:grid;grid-template-columns:1.1fr 1fr;gap:48px}
+.cta p{font-size:19px;color:var(--tx2);margin-top:16px}
+.cta form{display:grid;gap:12px}
+.cta input,.cta textarea{width:100%;background:#0d0d0f;border:1px solid var(--line);border-radius:14px;padding:15px 16px;outline:0}
+.cta input:focus,.cta textarea:focus{border-color:var(--y)}
+.cta textarea{min-height:100px;resize:vertical}
+.cta .btn{justify-content:center}
+.cta small{font-size:12.5px;color:#77766f}
+.pill[hidden]{display:none}
+.pill{display:inline-flex;gap:8px;align-items:center;margin-top:22px;padding:8px 14px;border-radius:999px;background:rgba(245,196,0,.1);color:var(--y);font-size:14px;font-weight:600}
+
+footer{border-top:1px solid var(--line);margin-top:110px;padding:64px 0 40px;font-size:15px;color:var(--tx2)}
+.fg{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
+footer b{color:var(--tx);display:block;margin-bottom:8px}
+footer .phn{font:600 26px Unbounded;color:var(--tx)}
+footer a:hover{color:var(--y)}
+footer .note{margin-top:14px;padding:12px 14px;border:1px solid rgba(255,138,31,.35);border-radius:12px;color:#e0c7a8}
+footer .bot{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:14px}
+footer .bot a{text-decoration:underline;text-decoration-color:#444}
+footer .legal{display:flex;gap:24px;margin-top:16px;flex-wrap:wrap}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:1400px){.hrow .btn{padding:12px 16px;font-size:14px}}
+@media (max-width:1320px){.hph small{display:none}}
+@media (max-width:1300px){.hrow .btn{display:none}}
+@media (max-width:1150px){
+  nav.menu,.hph small{display:none}
+  .burger{display:grid;place-items:center}
+  .hgrid,.geo,.cta,.flow{grid-template-columns:1fr}
+  .flow{gap:30px}
+  .adv,.expo{grid-template-columns:repeat(2,1fr)}
+  .tags{grid-template-columns:repeat(2,1fr)}
+  .nums{grid-template-columns:repeat(2,1fr)}
+  .nums div:nth-child(2){border-right:0}
+  .fg{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  section{padding:72px 0}
+  .hrow .btn,.hph{display:none}
+  .hrow{justify-content:space-between}
+  .hero{padding-top:100px}
+  .dirs,.adv,.expo,.nums{grid-template-columns:1fr}
+  .nums div{border-right:0;border-bottom:1px solid var(--line)}
+  .tags{gap:18px 12px}
+  .tagc .cap{flex-direction:column;align-items:flex-start}
+  .tagc .cap b{font-size:13px}
+  .cta{padding:30px 20px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header id="hdr"><div class="wrap hrow">
+  <a class="logo" href="#"><img src="../assets/img/logo.svg" alt="ШильдПанель"></a>
+  <nav class="menu">
+    <div><a href="#products">Продукция ▾</a><div class="sub"><a href="#">Корпуса</a><a href="#">Панели приборов</a><a href="#">Таблички</a><a href="#">Клавиатуры</a><a href="#">Шильды</a><a href="#">Маркировочные бирки</a><a href="#">Пульты управления и промышленные клавиатуры</a></div></div>
+    <div><a href="#">Технологии</a></div>
+    <div><a href="#">Разработка (КТБ)</a></div>
+    <div><a href="#">Материалы ▾</a><div class="sub"><a href="#">Анодированный алюминий</a><a href="#">Сублимационный алюминий</a></div></div>
+    <div><a href="#">Портфолио</a></div>
+    <div><a href="#">Кейсы</a></div>
+    <div><a href="#">О компании</a></div>
+  </nav>
+  <div class="hph"><a href="tel:78007775102">8 (800) 777-51-02</a><small>Бесплатный звонок по РФ</small></div>
+  <a class="btn btn-y" href="#form">Отправить заявку</a>
+  <button class="burger" aria-label="Меню">☰</button>
+</div></header>
+
+<section class="hero"><div class="wrap hgrid">
+  <div>
+    <span class="kicker">Производственная компания · 15 лет</span>
+    <h1>Впишите текст – <em>лазер</em> нанесёт его на&nbsp;шильд</h1>
+    <p class="lead">Шильды, лицевые панели, клавиатуры и корпуса под ключ. Собственное производство, ОТК каждого изделия, средний срок – 7 дней.</p>
+    <div class="dirs">
+      <a href="#products"><b>Лицевые панели</b><span>Панели приборов из алюминия, пластика, пленки и стали.</span></a>
+      <a href="#products"><b>Клавиатуры</b><span>Гибкие пленочные. Антистатические. Взрывозащищенные. Силиконовые. Металлические. Сенсорные.</span></a>
+      <a href="#products"><b>Корпуса и доработка корпусов</b><span>Механическая доработка. Нанесение устойчивого изображения. Комплектация крепежом.</span></a>
+      <a href="#products"><b>Шильды</b><span>Алюминий. Латунь. Нержавеющая сталь. Пластик и смола.</span></a>
+    </div>
+  </div>
+  <div class="lab">
+    <div class="stage"><div class="tilt" id="tilt">
+      <canvas id="plate" aria-label="Шильд с гравировкой"></canvas>
+      <div class="sheen" id="sheen"></div>
+      <div class="status" id="status">ЛАЗЕР · ГРАВИРОВКА</div>
+    </div></div>
+    <div class="ctrl">
+      <label for="txt">Текст на шильде</label>
+      <div class="row"><input id="txt" maxlength="24" value="ВАША КОМПАНИЯ"><button class="go" id="go" aria-label="Гравировать">↻</button></div>
+      <div class="mats" id="mats"></div>
+      <div class="foot">
+        <p>Прообраз конструктора в личном кабинете: <b>ИИ соберёт макет, калькулятор посчитает цену</b>, заказ уйдёт сразу в производство</p>
+        <a class="btn btn-y" href="#form" id="toForm">В производство →</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><div><span class="kicker">Почему мы</span><h2>Наши преимущества</h2></div></div>
+  <div class="adv" id="adv"></div>
+  <div class="nums rv">
+    <i class="beam"></i>
+    <div><b data-n="5000">5000</b><span>компаний доверили нам изготовление своей продукции</span></div>
+    <div><b data-n="7">7</b><span>рабочих дней – средний срок выполнения заказа в 2020 году</span></div>
+    <div><b data-n="96" data-s="%">96%</b><span>заказчиков довольны качеством продукции согласно опросам</span></div>
+    <div><b>&lt;1%</b><span>рекламаций – показатель качества нашей работы</span></div>
+  </div>
+</div></section>
+
+<section id="products" style="padding-top:0"><div class="wrap">
+  <div class="shead"><div><span class="kicker">Каталог</span><h2>Виды продукции</h2></div><a class="btn btn-g" href="#">Вся продукция →</a></div>
+  <div class="tags" id="tags"></div>
+</div></section>
+
+<section style="padding-top:0">
+  <div class="wrap"><div class="shead"><div><span class="kicker">Доверие</span><h2>Наши клиенты</h2></div><p>За 14 лет мы решили задачи тысяч компаний. От таблички на двери в соседнем офисе до панели управления на атомной станции.</p></div></div>
+  <div class="marq"><div class="track" id="t1"></div><div class="track rev" id="t2"></div></div>
+</section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="shead"><div><span class="kicker">События</span><h2>Выставки</h2></div><p>Являемся постоянными экспонентами ведущих профессиональных выставок.</p></div>
+  <div class="expo">
+    <article class="rv"><div class="pic"><img src="../assets/img/expo/rek.jpg" alt=""></div><p>Международная специализированная выставка</p></article>
+    <article class="rv"><div class="pic"><img src="../assets/img/expo/radel.jpg" alt=""></div><p>Международная выставка «Радиоэлектроника &amp; Приборостроение»</p></article>
+    <article class="rv"><div class="pic"><img src="../assets/img/expo/chipexpo.jpg" alt=""></div><p>Электроника, компоненты, оборудование, технологии</p></article>
+    <article class="rv"><div class="pic"><img src="../assets/img/expo/expo-electronika.jpg" alt=""></div><p>Международная выставка электронных компонентов, модулей и комплектующих</p></article>
+  </div>
+  <div style="margin-top:32px"><a class="btn btn-g" href="#">Смотреть дипломы об участии</a></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap flow">
+  <div><span class="kicker">Как работаем</span><h2>Схема работы</h2></div>
+  <div class="rail" id="rail"><i class="fill"></i>
+    <div class="step"><i class="dot"></i><small>ШАГ 01</small><h3>Оформление заказа</h3><p>Отправьте макеты или техническое задание. Поможем подобрать технологии и материалы.</p></div>
+    <div class="step"><i class="dot"></i><small>ШАГ 02</small><h3>Оплата и макеты</h3><p>Пришлите реквизиты и оплатите счёт. Разработаем макет за 1-3 рабочих дня. Утвердите макеты.</p></div>
+    <div class="step"><i class="dot"></i><small>ШАГ 03</small><h3>Производство</h3><p>Начинаем изготовление после оплаты и утверждения макетов. Средний срок 5 рабочих дней.</p></div>
+    <div class="step"><i class="dot"></i><small>ШАГ 04</small><h3>Отгрузка</h3><p>Проводим проверку в ОТК. Доставим любой удобной транспортной компанией до вас или пункта выдачи.</p></div>
+  </div>
+</div></section>
+
+<section id="geo" style="padding-top:0"><div class="wrap geo">
+  <div class="map rv"><img src="../assets/img/map.jpg" alt="Карта доставки"></div>
+  <div><span class="kicker">Доставка</span><h2>География работы – вся Россия</h2><div class="cities" id="cities"></div></div>
+</div></section>
+
+<section id="form" style="padding:0"><div class="wrap">
+  <div class="cta rv">
+    <div>
+      <span class="kicker">Производственная компания «ШильдПанель»</span>
+      <h2>Не нашли нужный продукт?</h2>
+      <p>Напишите нам, мы готовы решить нестандартные задачи.</p>
+      <div class="pill" id="pill" hidden></div>
+    </div>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Спасибо! Это прототип'">
+      <input placeholder="Имя" aria-label="Имя">
+      <input placeholder="Телефон или e-mail" aria-label="Телефон или e-mail">
+      <textarea id="task" placeholder="Опишите задачу: изделие, материал, тираж, размеры" aria-label="Задача"></textarea>
+      <button class="btn btn-y">Описать задачу</button>
+      <small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small>
+    </form>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fg">
+    <div><b>ООО «ШильдПанель»</b><div>ИНН 3329035362, ОГРН 1053303634075</div><div>Время работы: пн. – пт. 9:00 – 17:30</div><div class="note">Убедительная просьба – перед приездом обязательно отзвонитесь, в здании пропускная система!</div></div>
+    <div><a class="phn" href="tel:78007775102">8 (800) 777-51-02</a><div>Бесплатный звонок по РФ</div></div>
+    <div><b>Электронная почта</b><div><a href="mailto:info@shildpanel.ru">info@shildpanel.ru</a> – отдел продаж</div><div><a href="mailto:snab@shildpanel.ru">snab@shildpanel.ru</a> – отдел закупок</div><div><a href="mailto:hr@shildpanel.ru">hr@shildpanel.ru</a> – менеджер по персоналу</div></div>
+  </div>
+  <div class="bot">Мы доставляем в регионы: <span id="fcities"></span><div class="legal"><a href="#">Карта сайта</a><a href="#">Политика конфиденциальности</a><a href="#">Публичная оферта</a></div></div>
+</div></footer>
+
+<script>
+var ADV=[
+ ['utp-1','Собственное производство','15 лет разрабатываем и изготавливаем для России и мира. В 2020 году команда выросла до 90 специалистов, а площадь компании до 2000 м². Постоянно совершенствуем процессы и расширяемся.'],
+ ['utp-2','Три гарантии качества','1. Система менеджмента качества ГОСТ Р ИСО 9001-2015.\n2. Проверка ОТК каждого выпускаемого изделия.\n3. Замена брака без вопросов и с доставкой за наш счёт.'],
+ ['utp-3','Оптимальные цены','Всегда ищем способы снизить стоимость для вас как через технологии, так и через материалы. 5 лет держим цены на неизменном уровне благодаря растущим объёмам производства.'],
+ ['utp-4','Арсенал технологий','Всё в одной компании: печать и нанесение покрытий, механическая и лазерная обработка, электроника. Как эксперты в производстве, поможем сделать правильный выбор для решения ваших задач.'],
+ ['utp-5','Сроки без срывов','Средний срок изготовления за 2020 год – 7 дней. Отгрузим часть партии заранее. Не прячем голову в песок при форс-мажорах и готовы сжимать сроки. Склад сотни видов сырья весом более 10 тонн.'],
+ ['utp-6','Разработка под вас','Разрабатываем конструкции, электронику, 3D-модели. Подготавливаем опытные образцы, тестируем, совершенствуем готовые изделия. Умеем решать нестандартные задачи.']];
+var PROD=[['panel','Панели приборов'],['korpus','Корпуса'],['key','Клавиатуры'],['shild','Шильды'],['tab','Таблички'],['bei','Бейджи'],['birka','Маркировочные бирки'],['diplom','Дипломы и плакетки']];
+var CLIENTS=['uaz','mts','gum','transneft','universal','rosatom','otis','avtomatika','mail','rzd','teplokom','ckba','elteza','transmash'];
+var CITIES=['Москва','Санкт-Петербург','Воронеж','Екатеринбург','Ижевск','Казань','Красноярск','Нижний Новгород','Новосибирск','Омск','Пермь','Ростов-на-Дону','Самара','Саратов','Уфа','Челябинск'];
+var MATS=[
+ {id:'silver',n:'Алюминий',a:'#d3d6da',b:'#9ea3aa',e:'#23262b',hi:'rgba(255,255,255,.55)',g:.10},
+ {id:'black',n:'Чёрный анод',a:'#34353a',b:'#1b1c1f',e:'#e9ecef',hi:'rgba(0,0,0,.6)',g:.07},
+ {id:'gold',n:'Золото анод',a:'#e3c375',b:'#a8812f',e:'#2e2108',hi:'rgba(255,245,210,.5)',g:.09},
+ {id:'brass',n:'Латунь',a:'#cfa25a',b:'#8a6425',e:'#3b2608',hi:'rgba(255,230,190,.45)',g:.12},
+ {id:'steel',n:'Нержавейка',a:'#c4c8ce',b:'#7f858d',e:'#15181c',hi:'rgba(255,255,255,.5)',g:.16}];
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+
+/* ===== лазерная гравировка ===== */
+var cv=document.getElementById('plate'),ctx=cv.getContext('2d'),W,H,DPR,base,eng,rows,mat=MATS[0],head=0,run=false,sparks=[],t0=0,serial=String(Math.floor(Math.random()*9000)+1000);
+var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function size(){DPR=Math.min(2,window.devicePixelRatio||1);var r=cv.getBoundingClientRect();W=Math.round(r.width*DPR);H=Math.round(r.width*10/16*DPR);cv.width=W;cv.height=H}
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function off(){var c=document.createElement('canvas');c.width=W;c.height=H;return c}
+function buildBase(){
+  base=off();var c=base.getContext('2d'),m=W*.035,r=W*.035;
+  rr(c,m,m,W-2*m,H-2*m,r);c.save();c.clip();
+  var gr=c.createLinearGradient(0,m,W,H);gr.addColorStop(0,mat.a);gr.addColorStop(.55,mat.b);gr.addColorStop(1,mat.a);c.fillStyle=gr;c.fillRect(0,0,W,H);
+  // шлифовка
+  for(var i=0;i<H*1.4;i++){var y=Math.random()*H;c.fillStyle=Math.random()<.5?'rgba(255,255,255,'+(Math.random()*mat.g)+')':'rgba(0,0,0,'+(Math.random()*mat.g)+')';c.fillRect(0,y,W,Math.random()*1.4*DPR)}
+  var sh=c.createLinearGradient(0,0,0,H);sh.addColorStop(0,'rgba(255,255,255,.18)');sh.addColorStop(.5,'rgba(255,255,255,0)');sh.addColorStop(1,'rgba(0,0,0,.18)');c.fillStyle=sh;c.fillRect(0,0,W,H);
+  c.restore();
+  // фаска
+  rr(c,m+1,m+1,W-2*m-2,H-2*m-2,r);c.lineWidth=2*DPR;c.strokeStyle='rgba(255,255,255,.45)';c.stroke();
+  rr(c,m,m,W-2*m,H-2*m,r);c.lineWidth=1*DPR;c.strokeStyle='rgba(0,0,0,.35)';c.stroke();
+  // отверстия с винтами
+  var hr=W*.016;[[m+W*.05,m+W*.05],[W-m-W*.05,m+W*.05],[m+W*.05,H-m-W*.05],[W-m-W*.05,H-m-W*.05]].forEach(function(p){
+    var g=c.createRadialGradient(p[0]-hr*.3,p[1]-hr*.3,hr*.1,p[0],p[1],hr);g.addColorStop(0,'#f2f3f4');g.addColorStop(.6,'#9a9ea4');g.addColorStop(1,'#4b4e53');
+    c.beginPath();c.arc(p[0],p[1],hr*1.25,0,7);c.fillStyle='rgba(0,0,0,.35)';c.fill();
+    c.beginPath();c.arc(p[0],p[1],hr,0,7);c.fillStyle=g;c.fill();
+    c.save();c.translate(p[0],p[1]);c.rotate(Math.random()*3);c.fillStyle='#3a3c40';c.fillRect(-hr*.7,-hr*.12,hr*1.4,hr*.24);c.fillRect(-hr*.12,-hr*.7,hr*.24,hr*1.4);c.restore()});
+}
+function fit(c,txt,weight,family,maxW,start){var s=start;do{c.font=weight+' '+s+'px '+family;s-=2}while(c.measureText(txt).width>maxW&&s>10);return s+2}
+function buildEng(){
+  eng=off();var c=eng.getContext('2d'),m=W*.035,cx=W/2,txt=(document.getElementById('txt').value||' ').toUpperCase();
+  c.fillStyle=mat.e;c.textAlign='center';c.textBaseline='alphabetic';
+  // рамка
+  rr(c,m+W*.085,m+H*.1,W-2*m-W*.17,H-2*m-H*.2,W*.012);c.strokeStyle=mat.e;c.lineWidth=1.6*DPR;c.stroke();
+  c.font='600 '+Math.round(W*.022)+'px Manrope';c.fillText('ООО «ШИЛЬДПАНЕЛЬ» · СДЕЛАНО В РОССИИ',cx,m+H*.22);
+  var fs=fit(c,txt,'700','Unbounded',W*.66,Math.round(W*.075));c.font='700 '+fs+'px Unbounded';c.fillText(txt,cx,m+H*.22+H*.06+fs);
+  var y0=m+H*.22+H*.06+fs+H*.1,lx=W*.22,rx=W*.78,lh=W*.042;
+  c.font='500 '+Math.round(W*.022)+'px "JetBrains Mono"';
+  [['МОДЕЛЬ','ШП-'+mat.id.toUpperCase().slice(0,3)+'-01'],['ЗАВ. №',serial],['ГОД ВЫПУСКА','2026']].forEach(function(r,i){
+    c.textAlign='left';c.fillText(r[0],lx,y0+i*lh);c.textAlign='right';c.fillText(r[1],rx,y0+i*lh);
+    c.fillRect(lx+c.measureText(r[0]).width*0+W*.17,y0+i*lh-2*DPR,rx-lx-W*.17-c.measureText(r[1]).width-W*.02,1*DPR)});
+  // рельеф: подсветка по краю букв
+  var hi=off(),h=hi.getContext('2d');h.drawImage(eng,0,DPR);h.globalCompositeOperation='source-in';h.fillStyle=mat.hi;h.fillRect(0,0,W,H);
+  var fin=off(),f=fin.getContext('2d');f.drawImage(hi,0,0);f.drawImage(eng,0,0);eng=fin;
+  // карта строк для лазера
+  var d=eng.getContext('2d').getImageData(0,0,W,H).data;rows=new Array(H);
+  for(var y=0;y<H;y++){var mn=-1,mx=-1;for(var x=0;x<W;x+=2){if(d[(y*W+x)*4+3]>40){if(mn<0)mn=x;mx=x}}rows[y]=mn<0?null:[mn,mx]}
+}
+function start(){buildBase();buildEng();head=0;sparks=[];run=!RM;if(RM)head=H;t0=performance.now();document.getElementById('status').classList.toggle('on',run);if(!loopOn){loopOn=true;requestAnimationFrame(loop)}}
+var loopOn=false,lx=0,dir=1;
+function loop(t){
+  ctx.clearRect(0,0,W,H);ctx.drawImage(base,0,0);
+  ctx.save();ctx.beginPath();ctx.rect(0,0,W,head);ctx.clip();ctx.drawImage(eng,0,0);ctx.restore();
+  if(run){
+    var speed=H/190;var steps=0;while(head<H&&!rows[Math.floor(head)]&&steps<40){head+=speed*2;steps++}
+    head+=speed;var row=rows[Math.min(H-1,Math.floor(head))];
+    if(row){lx+=dir*(row[1]-row[0])/5;if(lx>row[1]){lx=row[1];dir=-1}if(lx<row[0]){lx=row[0];dir=1}
+      // раскалённая полоса
+      ctx.save();ctx.beginPath();ctx.rect(0,head-4*DPR,W,5*DPR);ctx.clip();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.9;ctx.filter='blur('+DPR+'px)';ctx.drawImage(eng,0,0);ctx.restore();
+      ctx.save();ctx.globalCompositeOperation='lighter';
+      var g=ctx.createRadialGradient(lx,head,0,lx,head,W*.05);g.addColorStop(0,'rgba(255,255,240,1)');g.addColorStop(.12,'rgba(255,190,80,.9)');g.addColorStop(.4,'rgba(255,120,20,.25)');g.addColorStop(1,'rgba(255,100,0,0)');
+      ctx.fillStyle=g;ctx.fillRect(lx-W*.05,head-W*.05,W*.1,W*.1);ctx.restore();
+      for(var k=0;k<3;k++)sparks.push({x:lx,y:head,vx:(Math.random()-.5)*6*DPR,vy:(-Math.random()*4-1)*DPR,l:1})}
+    // луч сверху
+    ctx.save();ctx.globalCompositeOperation='lighter';var bg=ctx.createLinearGradient(0,0,0,head);bg.addColorStop(0,'rgba(255,140,30,0)');bg.addColorStop(1,'rgba(255,170,60,.35)');ctx.fillStyle=bg;ctx.fillRect(lx-1*DPR,0,2*DPR,head);ctx.restore();
+    if(head>=H){run=false;document.getElementById('status').classList.remove('on')}
+  }
+  ctx.save();ctx.globalCompositeOperation='lighter';
+  sparks=sparks.filter(function(p){p.x+=p.vx;p.y+=p.vy;p.vy+=.25*DPR;p.l-=.035;if(p.l<=0)return false;ctx.strokeStyle='rgba(255,'+Math.round(150+100*p.l)+',60,'+p.l+')';ctx.lineWidth=1.3*DPR;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x-p.vx*1.8,p.y-p.vy*1.8);ctx.stroke();return true});
+  ctx.restore();
+  if(run||sparks.length)requestAnimationFrame(loop);else loopOn=false;
+}
+var mats=document.getElementById('mats');
+MATS.forEach(function(m,i){var b=el('button','mat'+(i?'':' on'));var sw=el('i');sw.style.background='linear-gradient(135deg,'+m.a+','+m.b+')';b.append(sw,m.n);
+  b.onclick=function(){mat=m;[].forEach.call(mats.children,function(x){x.classList.remove('on')});b.classList.add('on');start()};mats.appendChild(b)});
+var tmr;document.getElementById('txt').addEventListener('input',function(){clearTimeout(tmr);tmr=setTimeout(start,450)});
+document.getElementById('go').onclick=start;
+document.getElementById('toForm').addEventListener('click',function(){var t=document.getElementById('txt').value;document.getElementById('task').value='Шильд, материал: '+mat.n.toLowerCase()+', текст: «'+t+'». Тираж: ';var p=document.getElementById('pill');p.hidden=false;p.textContent='Макет из конструктора: '+t+' · '+mat.n});
+var tilt=document.getElementById('tilt'),sheen=document.getElementById('sheen');
+tilt.parentNode.addEventListener('mousemove',function(e){var r=tilt.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;tilt.style.transform='rotateY('+((x-.5)*14)+'deg) rotateX('+((.5-y)*10)+'deg)';sheen.style.setProperty('--sx',(x*100)+'%')});
+tilt.parentNode.addEventListener('mouseleave',function(){tilt.style.transform=''});
+var rs;addEventListener('resize',function(){clearTimeout(rs);rs=setTimeout(function(){size();buildBase();buildEng();if(!run){head=H;requestAnimationFrame(loop)}},200)});
+Promise.all([document.fonts.load('700 40px Unbounded'),document.fonts.load('500 20px "JetBrains Mono"'),document.fonts.load('600 20px Manrope')]).finally(function(){size();setTimeout(start,400)});
+
+/* ===== остальная страница ===== */
+var adv=document.getElementById('adv');
+ADV.forEach(function(a,i){var ar=el('article','rv'),ph=el('div','ph'),im=el('img');im.src='../assets/img/utp/'+a[0]+'.jpg';im.alt='';ph.append(im,el('span','n','0'+(i+1)));
+  var b=el('div','b'),p=el('p');a[2].split('\n').forEach(function(l,k){if(k)p.appendChild(el('br'));p.append(l)});b.append(el('h3',null,a[1]),p);ar.append(ph,b);adv.appendChild(ar)});
+var tags=document.getElementById('tags');
+PROD.forEach(function(p,i){var a=el('a','tagc rv');a.href='#';var bd=el('div','body'),im=el('img');im.src='../assets/img/prod/'+p[0]+'.jpg';im.alt='';var cap=el('div','cap');cap.append(el('b',null,p[1]),el('span',null,'0'+(i+1)+' →'));bd.append(el('i','hole'),im,cap,el('i','gl'));a.appendChild(bd);tags.appendChild(a)});
+function fill(id,list){var t=document.getElementById(id);list.concat(list).forEach(function(c){var d=el('div','plq'),im=el('img');im.src='../assets/img/clients/'+c+'.jpg';im.alt='';d.appendChild(im);t.appendChild(d)})}
+fill('t1',CLIENTS.slice(0,7));fill('t2',CLIENTS.slice(7));
+var ci=document.getElementById('cities'),fc=document.getElementById('fcities');
+CITIES.forEach(function(c,i){var a=el('a',null,c);a.href='#';ci.appendChild(a);var f=el('a',null,c);f.href='#';fc.append(f,i<CITIES.length-1?', ':'')});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
+  e.target.querySelectorAll('[data-n]').forEach(function(b){var n=+b.dataset.n,sf=b.dataset.s||'',s0=performance.now();(function f(t){var k=Math.min(1,(t-s0)/1600);b.textContent=Math.round(n*(1-Math.pow(1-k,3)))+sf;if(k<1)requestAnimationFrame(f)})(s0)})})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(e,i){e.style.transitionDelay=(i%4)*80+'ms';io.observe(e)});
+var hdr=document.getElementById('hdr'),rail=document.getElementById('rail'),steps=rail.querySelectorAll('.step');
+function onScroll(){hdr.classList.toggle('sc',scrollY>20);var r=rail.getBoundingClientRect(),vh=innerHeight,p=Math.max(0,Math.min(1,(vh*.6-r.top)/r.height));rail.style.setProperty('--p',(p*100)+'%');
+  steps.forEach(function(s){s.classList.toggle('on',s.getBoundingClientRect().top<vh*.6)})}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+</script>
+<script src="../assets/switcher.js"></script>
+</body>
+</html>

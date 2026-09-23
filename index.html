@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ШильдПанель – концепты главной</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:400 17px/1.55 Manrope,system-ui,sans-serif;background:#f5f4f0;color:#1f1f1e;padding:56px 16px}
+.wrap{max-width:1180px;margin:0 auto}
+img.logo{height:48px;margin-bottom:32px}
+h1{font-size:clamp(30px,4vw,48px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.lead{color:#555;max-width:720px;margin:16px 0 44px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+a.card{display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:#fff;text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s}
+a.card:hover{transform:translateY(-4px);box-shadow:0 24px 50px -24px rgba(0,0,0,.3)}
+.shot{aspect-ratio:16/10;background:#ddd center/cover no-repeat;border-bottom:1px solid #eee}
+.b{padding:22px 24px 26px}
+.n{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8a7400}
+h2{font-size:22px;margin:6px 0 10px}
+p{color:#555;font-size:15.5px}
+.note{margin-top:44px;padding:22px 24px;border-left:4px solid #f5c400;background:#fff;border-radius:0 16px 16px 0;font-size:15.5px;color:#444;max-width:820px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="wrap">
+<img class="logo" src="assets/img/logo.svg" alt="ШильдПанель">
+<h1>Концепты главной страницы</h1>
+<p class="lead">Три варианта на текущей структуре сайта: все блоки и тексты сохранены, меняется подача. Функции личного кабинета (ИИ-конструктор шильда, калькулятор, отправка в производство) – следующий этап, в третьем варианте показан их прообраз.</p>
+<div class="grid">
+  <a class="card" href="v1/"><div class="shot" style="background-image:url(assets/shots/v1.jpg)"></div><div class="b"><div class="n">Вариант 1</div><h2>Чистый промышленный</h2><p>Светлый, фирменный жёлтый и графит. Первый экран – металлическая пластина с фото продукции, которая наклоняется за курсором и ловит блик.</p></div></a>
+  <a class="card" href="v2/"><div class="shot" style="background-image:url(assets/shots/v2.jpg)"></div><div class="b"><div class="n">Вариант 2</div><h2>Чертёж КТБ</h2><p>Инженерный лист: сетка, штамп, размерные линии. Шильд прорисовывается как чертёж и «заполняется» фото изделия. Подчёркивает собственное конструкторское бюро.</p></div></a>
+  <a class="card" href="v3/"><div class="shot" style="background-image:url(assets/shots/v3.jpg)"></div><div class="b"><div class="n">WOW</div><h2>Лазер</h2><p>Тёмный цех. Посетитель вписывает свой текст и выбирает металл – лазер гравирует шильд прямо на экране, с искрами. Макет уходит в заявку.</p></div></a>
+</div>
+<div class="note">Это прототипы для обсуждения подачи, не финальный дизайн. Формы не отправляют данные. Фото и тексты – с текущего сайта shildpanel.ru.</div>
+</div>
+<script src="assets/switcher.js"></script>
+</body>
+</html>
