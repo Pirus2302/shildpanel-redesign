@@ -369,7 +369,7 @@ function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null
 /* ===== лазерная гравировка ===== */
 var cv=document.getElementById('plate'),ctx=cv.getContext('2d'),W,H,DPR,base,eng,rows,mat=MATS[0],head=0,run=false,sparks=[],t0=0,serial=String(Math.floor(Math.random()*9000)+1000);
 var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-function size(){DPR=Math.min(2,window.devicePixelRatio||1);var r=cv.getBoundingClientRect();W=Math.round(r.width*DPR);H=Math.round(r.width*10/16*DPR);cv.width=W;cv.height=H}
+function size(){DPR=Math.min(2,window.devicePixelRatio||1);var r=cv.getBoundingClientRect();if(r.width<10)return false;W=Math.round(r.width*DPR);H=Math.round(r.width*10/16*DPR);cv.width=W;cv.height=H;return true}
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 function off(){var c=document.createElement('canvas');c.width=W;c.height=H;return c}
 function buildBase(){
@@ -410,7 +410,7 @@ function buildEng(){
   var d=eng.getContext('2d').getImageData(0,0,W,H).data;rows=new Array(H);
   for(var y=0;y<H;y++){var mn=-1,mx=-1;for(var x=0;x<W;x+=2){if(d[(y*W+x)*4+3]>40){if(mn<0)mn=x;mx=x}}rows[y]=mn<0?null:[mn,mx]}
 }
-function start(){buildBase();buildEng();head=0;sparks=[];run=!RM;if(RM)head=H;t0=performance.now();document.getElementById('status').classList.toggle('on',run);if(!loopOn){loopOn=true;requestAnimationFrame(loop)}}
+function start(){if(!W&&!size()){setTimeout(start,250);return}buildBase();buildEng();head=0;sparks=[];run=!RM;if(RM)head=H;t0=performance.now();document.getElementById('status').classList.toggle('on',run);if(!loopOn){loopOn=true;requestAnimationFrame(loop)}}
 var loopOn=false,lx=0,dir=1;
 function loop(t){
   ctx.clearRect(0,0,W,H);ctx.drawImage(base,0,0);
@@ -443,8 +443,8 @@ document.getElementById('toForm').addEventListener('click',function(){var t=docu
 var tilt=document.getElementById('tilt'),sheen=document.getElementById('sheen');
 tilt.parentNode.addEventListener('mousemove',function(e){var r=tilt.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;tilt.style.transform='rotateY('+((x-.5)*14)+'deg) rotateX('+((.5-y)*10)+'deg)';sheen.style.setProperty('--sx',(x*100)+'%')});
 tilt.parentNode.addEventListener('mouseleave',function(){tilt.style.transform=''});
-var rs;addEventListener('resize',function(){clearTimeout(rs);rs=setTimeout(function(){size();buildBase();buildEng();if(!run){head=H;requestAnimationFrame(loop)}},200)});
-Promise.all([document.fonts.load('700 40px Unbounded'),document.fonts.load('500 20px "JetBrains Mono"'),document.fonts.load('600 20px Manrope')]).finally(function(){size();setTimeout(start,400)});
+var rs;addEventListener('resize',function(){clearTimeout(rs);rs=setTimeout(function(){if(!size())return;if(run){start();return}buildBase();buildEng();head=H;if(!loopOn){loopOn=true;requestAnimationFrame(loop)}},200)});
+Promise.all([document.fonts.load('700 40px Unbounded'),document.fonts.load('500 20px "JetBrains Mono"'),document.fonts.load('600 20px Manrope')]).finally(function(){setTimeout(start,400)});
 
 /* ===== остальная страница ===== */
 var adv=document.getElementById('adv');
