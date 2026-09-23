@@ -444,7 +444,8 @@ var tilt=document.getElementById('tilt'),sheen=document.getElementById('sheen');
 tilt.parentNode.addEventListener('mousemove',function(e){var r=tilt.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;tilt.style.transform='rotateY('+((x-.5)*14)+'deg) rotateX('+((.5-y)*10)+'deg)';sheen.style.setProperty('--sx',(x*100)+'%')});
 tilt.parentNode.addEventListener('mouseleave',function(){tilt.style.transform=''});
 var rs;addEventListener('resize',function(){clearTimeout(rs);rs=setTimeout(function(){if(!size())return;if(run){start();return}buildBase();buildEng();head=H;if(!loopOn){loopOn=true;requestAnimationFrame(loop)}},200)});
-Promise.all([document.fonts.load('700 40px Unbounded'),document.fonts.load('500 20px "JetBrains Mono"'),document.fonts.load('600 20px Manrope')]).finally(function(){setTimeout(start,400)});
+(function pre(){if(!size()){setTimeout(pre,100);return}buildBase();ctx.drawImage(base,0,0)})();
+Promise.all([document.fonts.load('700 40px Unbounded'),document.fonts.load('500 20px "JetBrains Mono"'),document.fonts.load('600 20px Manrope')]).finally(function(){setTimeout(start,150)});
 
 /* ===== остальная страница ===== */
 var adv=document.getElementById('adv');
